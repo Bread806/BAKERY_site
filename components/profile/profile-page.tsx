@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import bakeryAvatar from "@/assets/BAKERY標準字/白/(白)logo.png";
+import bakerywhitetype from "@/assets/BAKERY標準字/白/white_bakery_type.png";
 import bakeryWorkOne from "@/assets/BAKERY標準字/白/白bakery logo-01.png";
 import bakeryWorkTwo from "@/assets/BAKERY標準字/白/白bakery logo-02.png";
 import bakeryWorkThree from "@/assets/BAKERY標準字/白/白bakery logo-03.png";
@@ -28,23 +29,21 @@ import personalWorkTwo from "@/assets/IMG_4907.jpeg";
 import personalCommissionOne from "@/assets/IMG_4905.jpg";
 import personalWordmarkDark from "@/assets/卡蚯蚓標準字/黑字.png";
 import personalWordmarkLight from "@/assets/卡蚯蚓標準字/白字.png";
+import personalwhitetype from "@/assets/卡蚯蚓標準字/white_type.png";
 import { cn } from "@/lib/utils";
 
 const SITE_DATA = {
   personal: {
-    toggleLabel: "Personal",
-    name: "卡蚯蚓",
-    title: "Character Illustrator & Visual Storyteller",
-    bio: "把角色感、幽默感和可讀性揉進同一張圖裡，讓作品既能作為插畫，也能延伸成封面、主視覺和個人識別。現在開放插畫委託、角色設計與小型品牌合作。",
-    chips: ["Taipei based", "Open for commissions", "Character-driven visuals"],
+    name: "",
+    title: "撰寫台本、短篇語音、文字創作",
     avatar: {
       image: personalAvatar,
       alt: "卡蚯蚓個人角色主視覺",
       fit: "cover",
     },
     wordmark: {
-      image: personalWordmarkLight,
-      alt: "卡蚯蚓標準字",
+      image: personalwhitetype,
+      alt: "卡蚯蚓白色標準字",
     },
     theme: {
       background: "from-[#1b110d] via-[#140d0a] to-[#080607]",
@@ -154,19 +153,17 @@ const SITE_DATA = {
     },
   },
   group: {
-    toggleLabel: "Group",
-    name: "BAKERY",
-    title: "Visual Club / Creative Collective",
-    bio: "BAKERY 把社團視覺做得像一套可以持續生長的系統，從標準字、主識別到宣傳版面都保留一致語氣，也保留足夠的玩心。適合展演、活動和聯名合作。",
-    chips: ["Collective identity", "Event visuals", "Open to collaborations"],
+    name: "",
+    title: "為了烘焙美好文字而發表任性的音聲作品。",
+    bio: "",
     avatar: {
       image: bakeryAvatar,
       alt: "BAKERY 社團標誌",
       fit: "cover",
     },
     wordmark: {
-      image: bakeryWorkOne,
-      alt: "BAKERY 標準字",
+      image: bakerywhitetype,
+      alt: "BAKERY 白色標準字",
     },
     theme: {
       background: "from-[#17110d] via-[#110d0a] to-[#070606]",
@@ -435,10 +432,6 @@ export function ProfilePage() {
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-6 lg:px-8">
         <IdentityToggle
           identity={identity}
-          labels={{
-            personal: SITE_DATA.personal.toggleLabel,
-            group: SITE_DATA.group.toggleLabel,
-          }}
           onChange={handleIdentityChange}
         />
 
@@ -472,7 +465,7 @@ export function ProfilePage() {
                       alt={profile.avatar.alt}
                       priority
                       sizes="(min-width: 768px) 224px, 192px"
-                      className="h-full w-full scale-110 object-cover"
+                      className="h-full w-full scale-100 object-cover"
                     />
                   </div>
                 </div>
@@ -484,10 +477,6 @@ export function ProfilePage() {
                 transition={{ ...sectionTransition, delay: reduceMotion ? 0 : 0.06 }}
                 className="space-y-5"
               >
-                <div className="mx-auto inline-flex items-center rounded-full border border-white/20 bg-white/8 px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.28em] text-white/70 backdrop-blur-2xl">
-                  {profile.toggleLabel}
-                </div>
-
                 <div className="space-y-3">
                   <h1 className="font-serif text-5xl tracking-tight text-white sm:text-6xl md:text-7xl">
                     {profile.name}
@@ -497,43 +486,31 @@ export function ProfilePage() {
                   </p>
                 </div>
 
-                <div className="mx-auto flex w-full max-w-sm items-center justify-center rounded-[24px] border border-white/20 bg-white/8 p-4 backdrop-blur-2xl">
+                <div className="mx-auto flex w-full max-w-sm items-center justify-center">
                   <Image
                     src={profile.wordmark.image}
                     alt={profile.wordmark.alt}
-                    sizes="(min-width: 640px) 320px, 280px"
-                    className="h-auto max-h-24 w-auto object-contain"
+                    sizes="(min-width: 640px) 320px, 220px"
+                    className="h-auto max-h-25 w-auto object-contain sm:max-h-50"
                   />
                 </div>
 
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  {profile.chips.map((chip) => (
-                    <span
-                      key={chip}
-                      className={cn(
-                        "rounded-full border border-white/12 px-3 py-1.5 text-xs uppercase tracking-[0.2em] backdrop-blur-2xl",
-                        profile.theme.badge,
-                      )}
-                    >
-                      {chip}
-                    </span>
-                  ))}
-                </div>
               </motion.div>
 
-              <motion.div
-                initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...sectionTransition, delay: reduceMotion ? 0 : 0.1 }}
-                className="mx-auto max-w-3xl rounded-[32px] border border-white/20 bg-white/8 px-6 py-6 backdrop-blur-2xl sm:px-8 sm:py-7"
-              >
-                <p className="text-sm leading-8 text-white/78 sm:text-base">
-                  {profile.bio}
-                </p>
-              </motion.div>
+              {"bio" in profile && profile.bio ? (
+                <motion.div
+                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...sectionTransition, delay: reduceMotion ? 0 : 0.1 }}
+                  className="mx-auto max-w-3xl rounded-[32px] border border-white/20 bg-white/8 px-6 py-6 backdrop-blur-2xl sm:px-8 sm:py-7"
+                >
+                  <p className="text-sm leading-8 text-white/78 sm:text-base">
+                    {profile.bio}
+                  </p>
+                </motion.div>
+              ) : null}
             </header>
-
-            <section className="mx-auto w-full max-w-[42rem] rounded-[30px] border border-white/20 bg-white/8 p-4 backdrop-blur-2xl sm:p-5 md:p-6">
+            <section className="mx-auto w-full max-w-[40rem] rounded-[30px] border border-white/20 bg-white/8 p-4 backdrop-blur-2xl sm:p-5 md:p-6">
               <SectionTabs
                 sections={profile.sections}
                 activeTab={activeTab}
@@ -607,13 +584,16 @@ export function ProfilePage() {
 
 function IdentityToggle({
   identity,
-  labels,
   onChange,
 }: {
   identity: IdentityKey;
-  labels: Record<IdentityKey, string>;
   onChange: (identity: IdentityKey) => void;
 }) {
+  const labels = {
+    personal: "卡蚯蚓",
+    group: "蚯蚓麵包屋",
+  } as const;
+
   return (
     <LayoutGroup id="identity-toggle">
       <div className="mx-auto inline-flex items-center rounded-full border border-white/15 bg-white/8 p-1.5 backdrop-blur-2xl">
@@ -736,7 +716,12 @@ function GalleryPanel({
           </IconButton>
         </div>
       </div>
-
+{/* 最重要幾個 class 是：
+min-h-[14rem] sm:min-h-[18rem]
+rounded-[26px]
+p-2.5
+p-4 sm:p-5
+如果你想整體再更小，先改 min-h-[14rem] 和 max-w-[42rem] 這兩個最有感。 */}
       <div className="overflow-hidden rounded-[26px] border border-white/20 bg-white/6 p-2.5 backdrop-blur-2xl">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1.2fr)_minmax(220px,0.72fr)]">
           <motion.button
@@ -1107,11 +1092,9 @@ type MotionTransition = {
 };
 
 type ProfileEntry = {
-  toggleLabel: string;
   name: string;
   title: string;
-  bio: string;
-  chips: string[];
+  bio?: string;
   avatar: {
     image: StaticImageData;
     alt: string;
