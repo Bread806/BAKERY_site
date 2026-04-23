@@ -30,7 +30,13 @@ import personalCommissionOne from "@/assets/IMG_4905.jpg";
 import personalWordmarkDark from "@/assets/卡蚯蚓標準字/黑字.png";
 import personalWordmarkLight from "@/assets/卡蚯蚓標準字/白字.png";
 import personalwhitetype from "@/assets/卡蚯蚓標準字/white_type.png";
+import {
+  AudioParticleField,
+  type AudioParticleTheme,
+} from "@/components/profile/audio-particle-field";
 import { cn } from "@/lib/utils";
+
+const PRELOADED_ASSETS = new Map<string, Promise<void>>();
 
 const SITE_DATA = {
   personal: {
@@ -47,6 +53,7 @@ const SITE_DATA = {
     },
     theme: {
       background: "from-[#1b110d] via-[#140d0a] to-[#080607]",
+      backgroundImageOpacity: "opacity-[0.12]",
       orbPrimary: "bg-[#f9c58c]/20",
       orbSecondary: "bg-[#ff8f5c]/18",
       accentText: "text-[#ffe2c5]",
@@ -54,6 +61,11 @@ const SITE_DATA = {
       accentBorder: "border-[#f7c89b]/40",
       badge: "bg-[#f7c89b]/12 text-[#ffe6ce]",
       glow: "shadow-[0_0_90px_rgba(255,216,184,0.28)]",
+      particleColor: "#f7e8cb",
+      particleGlow: "#f3b672",
+      particleDensity: 0.50, //0.82
+      particleSpeed: 0.20,
+      particleAmplitude: 0.26,
     },
     sections: {
       works: {
@@ -166,14 +178,20 @@ const SITE_DATA = {
       alt: "BAKERY 白色標準字",
     },
     theme: {
-      background: "from-[#17110d] via-[#110d0a] to-[#070606]",
-      orbPrimary: "bg-[#f6d493]/18",
-      orbSecondary: "bg-[#b36a35]/20",
-      accentText: "text-[#fbe7bf]",
-      accentSurface: "bg-[#f0d29e]",
-      accentBorder: "border-[#f0d29e]/40",
-      badge: "bg-[#f0d29e]/12 text-[#f8e7c4]",
-      glow: "shadow-[0_0_90px_rgba(248,220,165,0.22)]",
+      background: "from-[#030816] via-[#02050e] to-[#000104]",
+      backgroundImageOpacity: "opacity-[0.05]",
+      orbPrimary: "bg-[#6a8cff]/16",
+      orbSecondary: "bg-[#dbe5ff]/12",
+      accentText: "text-[#dce6ff]",
+      accentSurface: "bg-[#dce6ff]",
+      accentBorder: "border-[#9fb7ff]/35",
+      badge: "bg-white/8 text-[#eff4ff]",
+      glow: "shadow-[0_0_110px_rgba(112,150,255,0.24)]",
+      particleColor: "#eef4ff",
+      particleGlow: "#7da1ff",
+      particleDensity: 0.32,
+      particleSpeed: 0.45,
+      particleAmplitude: 0.52,
     },
     sections: {
       works: {
@@ -295,6 +313,11 @@ export function ProfilePage() {
   const [activeTab, setActiveTab] = useState<TabKey>("works");
   const [slideState, setSlideState] = useState<SlideState>(INITIAL_SLIDE_STATE);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [pendingIdentity, setPendingIdentity] = useState<IdentityKey | null>(null);
+  const [preloadedIdentities, setPreloadedIdentities] = useState<Record<IdentityKey, boolean>>({
+    personal: false,
+    group: false,
+  });
 
   const reduceMotion = Boolean(useReducedMotion());
   const profile = SITE_DATA[identity];
@@ -303,6 +326,28 @@ export function ProfilePage() {
   const currentSection =
     activeTab === "contact" ? null : profile.sections[activeTab];
   const currentItem = currentSection?.items[currentGalleryIndex] ?? null;
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (Object.entries(SITE_DATA) as [IdentityKey, ProfileEntry][]).forEach(
+      ([key, entry]) => {
+        preloadProfileAssets(entry).then(() => {
+          if (cancelled) {
+            return;
+          }
+
+          setPreloadedIdentities((previous) =>
+            previous[key] ? previous : { ...previous, [key]: true },
+          );
+        });
+      },
+    );
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (!lightboxOpen) {
@@ -316,6 +361,18 @@ export function ProfilePage() {
       document.body.style.overflow = previousOverflow;
     };
   }, [lightboxOpen]);
+
+  useEffect(() => {
+    if (!pendingIdentity || !preloadedIdentities[pendingIdentity]) {
+      return;
+    }
+
+    startTransition(() => {
+      setIdentity(pendingIdentity);
+      setPendingIdentity(null);
+      setLightboxOpen(false);
+    });
+  }, [pendingIdentity, preloadedIdentities]);
 
   useEffect(() => {
     if (!lightboxOpen || activeTab === "contact" || !currentSection) {
@@ -367,13 +424,24 @@ export function ProfilePage() {
 
   const handleIdentityChange = (nextIdentity: IdentityKey) => {
     if (nextIdentity === identity) {
+      setPendingIdentity(null);
       return;
     }
 
-    startTransition(() => {
-      setIdentity(nextIdentity);
-      setLightboxOpen(false);
-    });
+    if (nextIdentity === pendingIdentity) {
+      return;
+    }
+
+    if (preloadedIdentities[nextIdentity]) {
+      startTransition(() => {
+        setIdentity(nextIdentity);
+        setPendingIdentity(null);
+        setLightboxOpen(false);
+      });
+      return;
+    }
+
+    setPendingIdentity(nextIdentity);
   };
 
   const handleTabChange = (tab: TabKey) => {
@@ -399,7 +467,12 @@ export function ProfilePage() {
 
   return (
     <div className="relative isolate min-h-screen overflow-hidden bg-[#080607] text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[url('/images/profile-bg.jpg')] bg-cover bg-center opacity-[0.12] mix-blend-screen" />
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0 bg-[url('/images/profile-bg.jpg')] bg-cover bg-center mix-blend-screen",
+          profile.theme.backgroundImageOpacity,
+        )}
+      />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
 
       <AnimatePresence mode="wait">
@@ -429,9 +502,12 @@ export function ProfilePage() {
         </motion.div>
       </AnimatePresence>
 
+      <AudioParticleField identity={identity} theme={profile.theme} />
+
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-6 lg:px-8">
         <IdentityToggle
           identity={identity}
+          pendingIdentity={pendingIdentity}
           onChange={handleIdentityChange}
         />
 
@@ -478,9 +554,11 @@ export function ProfilePage() {
                 className="space-y-5"
               >
                 <div className="space-y-3">
-                  <h1 className="font-serif text-5xl tracking-tight text-white sm:text-6xl md:text-7xl">
-                    {profile.name}
-                  </h1>
+                  {profile.name ? (
+                    <h1 className="font-serif text-5xl tracking-tight text-white sm:text-6xl md:text-7xl">
+                      {profile.name}
+                    </h1>
+                  ) : null}
                   <p className={cn("text-sm uppercase tracking-[0.24em] sm:text-base", profile.theme.accentText)}>
                     {profile.title}
                   </p>
@@ -491,7 +569,7 @@ export function ProfilePage() {
                     src={profile.wordmark.image}
                     alt={profile.wordmark.alt}
                     sizes="(min-width: 640px) 320px, 220px"
-                    className="h-auto max-h-25 w-auto object-contain sm:max-h-50"
+                    className="h-auto max-h-20 w-auto object-contain sm:max-h-28"
                   />
                 </div>
 
@@ -584,9 +662,11 @@ export function ProfilePage() {
 
 function IdentityToggle({
   identity,
+  pendingIdentity,
   onChange,
 }: {
   identity: IdentityKey;
+  pendingIdentity: IdentityKey | null;
   onChange: (identity: IdentityKey) => void;
 }) {
   const labels = {
@@ -599,13 +679,17 @@ function IdentityToggle({
       <div className="mx-auto inline-flex items-center rounded-full border border-white/15 bg-white/8 p-1.5 backdrop-blur-2xl">
         {(["personal", "group"] as const).map((value) => {
           const isActive = identity === value;
+          const isPending = pendingIdentity === value;
 
           return (
             <button
               key={value}
               type="button"
               onClick={() => onChange(value)}
-              className="relative min-w-28 px-5 py-2.5 text-sm uppercase tracking-[0.24em] text-white/72 transition-colors hover:text-white"
+              className={cn(
+                "relative min-w-28 px-5 py-2.5 text-sm uppercase tracking-[0.24em] text-white/72 transition-colors hover:text-white",
+                isPending && "cursor-progress text-white/88",
+              )}
             >
               {isActive && (
                 <motion.span
@@ -716,12 +800,7 @@ function GalleryPanel({
           </IconButton>
         </div>
       </div>
-{/* 最重要幾個 class 是：
-min-h-[14rem] sm:min-h-[18rem]
-rounded-[26px]
-p-2.5
-p-4 sm:p-5
-如果你想整體再更小，先改 min-h-[14rem] 和 max-w-[42rem] 這兩個最有感。 */}
+
       <div className="overflow-hidden rounded-[26px] border border-white/20 bg-white/6 p-2.5 backdrop-blur-2xl">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1.2fr)_minmax(220px,0.72fr)]">
           <motion.button
@@ -1084,6 +1163,68 @@ function wrapIndex(index: number, total: number) {
   return (index + total) % total;
 }
 
+function preloadProfileAssets(profile: ProfileEntry) {
+  return Promise.all(
+    getCoreAssets(profile).map((asset) => preloadImageAsset(asset)),
+  ).then(() => undefined);
+}
+
+function getCoreAssets(profile: ProfileEntry) {
+  return [
+    profile.avatar.image,
+    profile.wordmark.image,
+    profile.sections.works.items[0]?.image,
+    profile.sections.commission.items[0]?.image,
+  ].filter((asset): asset is StaticImageData => Boolean(asset));
+}
+
+function preloadImageAsset(asset: StaticImageData) {
+  const cached = PRELOADED_ASSETS.get(asset.src);
+  if (cached) {
+    return cached;
+  }
+
+  const promise = new Promise<void>((resolve) => {
+    if (typeof window === "undefined") {
+      resolve();
+      return;
+    }
+
+    const image = new window.Image();
+    let settled = false;
+
+    const finalize = () => {
+      if (settled) {
+        return;
+      }
+
+      settled = true;
+      resolve();
+    };
+
+    const decodeImage = () => {
+      if (typeof image.decode === "function") {
+        image.decode().catch(() => undefined).finally(finalize);
+        return;
+      }
+
+      finalize();
+    };
+
+    image.decoding = "async";
+    image.onload = decodeImage;
+    image.onerror = finalize;
+    image.src = asset.src;
+
+    if (image.complete) {
+      decodeImage();
+    }
+  });
+
+  PRELOADED_ASSETS.set(asset.src, promise);
+  return promise;
+}
+
 type SiteDataMap = Record<"personal" | "group", ProfileEntry>;
 type BezierEase = [number, number, number, number];
 type MotionTransition = {
@@ -1104,8 +1245,9 @@ type ProfileEntry = {
     image: StaticImageData;
     alt: string;
   };
-  theme: {
+  theme: AudioParticleTheme & {
     background: string;
+    backgroundImageOpacity: string;
     orbPrimary: string;
     orbSecondary: string;
     accentText: string;
