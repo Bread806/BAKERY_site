@@ -10,7 +10,7 @@ import bakeryWorkThree from "@/assets/BAKERY標準字/白/白bakery logo-03.png"
 import bakeryCommissionOne from "@/assets/BAKERY標準字/黑/黑bakery logo-01.png";
 import bakeryCommissionTwo from "@/assets/BAKERY標準字/黑/黑bakery logo-02.png";
 import bakeryCommissionThree from "@/assets/BAKERY標準字/黑/黑bakery logo-03.png";
-import personalAvatar from "@/assets/卡蚯蚓_完稿.png";
+import personalAvatar from "@/assets/二號柴柴2.png";
 import personalWorkOne from "@/assets/Bread_work/work_karas.jpg";
 import personalWorkTwo from "@/assets/Bread_work/work_rain.jpeg";
 import personalWorkthree from "@/assets/Bread_work/love_sick.png";
@@ -47,13 +47,13 @@ export const PROFILE_SITE_DATA = {
         eyebrow: "Selected Artwork",
         heading: "發表作品",
         description:
-          "節錄部分合作與創作。",
+          "節錄部分合作與創作。 <a href='https://youtu.be/H5BQIZOmnuE'>連結</a>",
         items: [
           {
             id: "personal-work-main",
             title: "居酒屋的姊姊似乎討厭下雨天",
             description:
-              "Project:Limnos｜Voice:黑銀夜烏｜Script:卡蚯蚓",
+              "Project:Limnos｜Voice:黑銀夜烏｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/H5BQIZOmnuE?si=BiW56GAkF6bJaNJk'>連結</a>" ,
             image: personalWorkOne,
             alt: "居酒屋的姊姊似乎討厭下雨天",
             fit: "contain",
@@ -138,27 +138,27 @@ export const PROFILE_SITE_DATA = {
         heading: "聯繫",
         description:
           "目前關閉委託，但仍歡迎與我聯繫。",
-        note: "目前適合單角色、雙角色、社群封面、活動視覺與個人識別延伸。",
+        note: "",
         links: [
           {
             id: "personal-twitter",
             label: "Twitter",
-            value: "@yourhandle",
-            href: "https://x.com/",
+            value: "@bread_sk8",
+            href: "https://x.com/bread_sk8",
             icon: "twitter",
           },
           {
             id: "personal-discord",
             label: "Discord",
-            value: "yourname#0000",
-            href: "https://discord.com/",
+            value: "@bread_sk8",
+            href: "https://discord.gg/7SkGeDsUWu",
             icon: "discord",
           },
           {
             id: "personal-email",
             label: "Mail",
-            value: "hello@example.com",
-            href: "mailto:hello@example.com",
+            value: "wormbakery@gmail.com",
+            href: "mailto:wormbakery@gmail.com",
             icon: "mail",
           },
         ],
@@ -249,8 +249,8 @@ export const PROFILE_SITE_DATA = {
           {
             id: "group-twitter",
             label: "Twitter",
-            value: "@bread_sk8",
-            href: "https://x.com/bread_sk8",
+            value: "@wormbakery",
+            href: "https://x.com/wormbakery",
             icon: "twitter",
           },
           {

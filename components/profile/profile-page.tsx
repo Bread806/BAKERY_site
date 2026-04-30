@@ -574,7 +574,7 @@ function GalleryPanel({
           <h2 className="font-serif text-3xl tracking-tight text-white sm:text-4xl md:text-[2.9rem]">
             {section.heading}
           </h2>
-          <p className="space-y-2 text-sm leading-8 text-white/68 sm:text-base [&_a]:underline [&_a]:underline-offset-4 [&_a]:text-white/90 hover:[&_a]:text-white" dangerouslySetInnerHTML={{ __html: section.description }} />
+          <p           className="text-sm leading-8 text-white/68 sm:text-base [&_a]:pointer-events-auto [&_a]:underline [&_a]:underline-offset-4 [&_a]:text-white/90 hover:[&_a]:text-white" dangerouslySetInnerHTML={{ __html: section.description }} />
         </div>
 
         <div className="hidden items-center gap-2">
@@ -833,9 +833,7 @@ function Lightbox({
               </div>
 
               <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                <p className="max-w-2xl text-sm leading-7 text-white/72 sm:text-base">
-                  {item.description}
-                </p>
+                <p className="max-w-2xl text-sm leading-7 text-white/72 sm:text-base [&_a]:pointer-events-auto [&_a]:underline [&_a]:underline-offset-4 [&_a]:text-white/90 hover:[&_a]:text-white" dangerouslySetInnerHTML={{ __html: item.description }} />
 
                 <div className="flex items-center justify-center gap-2">
                   {items.map((slide, index) => {
