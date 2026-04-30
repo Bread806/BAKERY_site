@@ -11,9 +11,13 @@ import bakeryCommissionOne from "@/assets/BAKERY標準字/黑/黑bakery logo-01.
 import bakeryCommissionTwo from "@/assets/BAKERY標準字/黑/黑bakery logo-02.png";
 import bakeryCommissionThree from "@/assets/BAKERY標準字/黑/黑bakery logo-03.png";
 import personalAvatar from "@/assets/卡蚯蚓_完稿.png";
-import personalWorkOne from "@/assets/二號柴柴2.png";
-import personalWorkTwo from "@/assets/IMG_4907.jpeg";
-import personalCommissionOne from "@/assets/IMG_4905.jpg";
+import personalWorkOne from "@/assets/Bread_work/work_karas.jpg";
+import personalWorkTwo from "@/assets/Bread_work/work_rain.jpeg";
+import personalWorkthree from "@/assets/Bread_work/love_sick.png";
+import personalWorkfour from "@/assets/Bread_work/love_sick.png";
+import personalCommissionOne from "@/assets/Bread_commission/work_narciss.jpg";
+import personalCommissionTwo from "@/assets/Bread_commission/work_sparky.jpg";
+import personalCommissionThree from "@/assets/Bread_commission/work_want.jpg";
 import personalWordmarkDark from "@/assets/卡蚯蚓標準字/黑字.png";
 import personalWordmarkLight from "@/assets/卡蚯蚓標準字/白字.png";
 import personalwhitetype from "@/assets/卡蚯蚓標準字/white_type.png";
@@ -25,7 +29,7 @@ export const PROFILE_SITE_DATA = {
     name: "",
     title: "撰寫台本、短篇語音、文字創作",
     avatar: {
-      image: personalAvatar,
+      image: personalAvatar, //personalAvatar
       alt: "卡蚯蚓個人角色主視覺",
       fit: "cover",
     },
@@ -40,16 +44,16 @@ export const PROFILE_SITE_DATA = {
       works: {
         label: "Works",
         eyebrow: "Selected Artwork",
-        heading: "柔軟、荒謬、但很有記憶點的角色畫面",
+        heading: "過往發表內容",
         description:
-          "主軸放在角色輪廓、表情節奏和畫面色塊的控制，讓每張圖都能獨立成立，也能延伸成一個完整的小宇宙。",
+          "節錄部分合作與創作。所有內容可見<a href=\"??\">test</a>",
         items: [
           {
             id: "personal-work-main",
             title: "卡蚯蚓 Character Key Visual",
             description:
               "作為個人代表角色的完稿，重點在辨識度、姿態與透明背景下的可延展性。",
-            image: personalAvatar,
+            image: personalWorkOne,
             alt: "卡蚯蚓角色主視覺插畫",
             fit: "contain",
           },
@@ -58,7 +62,7 @@ export const PROFILE_SITE_DATA = {
             title: "二號柴柴",
             description:
               "以更圓潤的輪廓和留白去測試角色親和力，適合社群貼文與周邊延伸。",
-            image: personalWorkOne,
+            image: personalWorkTwo,
             alt: "二號柴柴角色插畫",
             fit: "contain",
           },
@@ -67,7 +71,16 @@ export const PROFILE_SITE_DATA = {
             title: "Studio Snapshot",
             description:
               "透過實拍保留筆觸與材質細節，讓數位作品在展示時多一點溫度和真實感。",
-            image: personalWorkTwo,
+            image: personalWorkthree,
+            alt: "個人作品展示實拍照",
+            fit: "contain",
+          },
+          {
+            id: "personal-work-photo",
+            title: "Studio Snapshot",
+            description:
+              "透過實拍保留筆觸與材質細節，讓數位作品在展示時多一點溫度和真實感。",
+            image: personalWorkfour,
             alt: "個人作品展示實拍照",
             fit: "cover",
           },
@@ -75,10 +88,10 @@ export const PROFILE_SITE_DATA = {
       },
       commission: {
         label: "Commission",
-        eyebrow: "Ways To Collaborate",
-        heading: "可被整理成委託案與提案版型的視覺語言",
+        eyebrow: "Selected Commission",
+        heading: "委託內容",
         description:
-          "從單張角色委託，到封面圖、活動主視覺和個人識別，我會把畫面保留得夠有特色，同時讓交付格式足夠實用。",
+          "過往委託內容，可能包含全年齡或成人向。",
         items: [
           {
             id: "personal-commission-photo",
@@ -94,7 +107,7 @@ export const PROFILE_SITE_DATA = {
             title: "Signature Wordmark",
             description:
               "白字版本可以直接放進首頁、封面和大面積留白的展示環境。",
-            image: personalWordmarkLight,
+            image: personalCommissionTwo,
             alt: "卡蚯蚓白字標準字",
             fit: "contain",
           },
@@ -103,7 +116,7 @@ export const PROFILE_SITE_DATA = {
             title: "High-Contrast System",
             description:
               "黑字版本更適合印刷和標籤型版面，能保留識別的一致性。",
-            image: personalWordmarkDark,
+            image: personalCommissionThree,
             alt: "卡蚯蚓黑字標準字",
             fit: "contain",
           },
@@ -112,28 +125,28 @@ export const PROFILE_SITE_DATA = {
       contact: {
         label: "Contact",
         eyebrow: "Start A Project",
-        heading: "插畫委託、角色合作和視覺聊天都歡迎",
+        heading: "聯繫",
         description:
-          "如果你已經有大致方向，可以直接把時程、預算和用途一起丟來，回覆會更快也更精準。",
+          "目前關閉委託，但仍歡迎與我聯繫。",
         note: "目前適合單角色、雙角色、社群封面、活動視覺與個人識別延伸。",
         links: [
           {
-            id: "personal-instagram",
-            label: "Instagram",
+            id: "personal-twitter",
+            label: "Twitter",
             value: "@yourhandle",
-            href: "https://instagram.com/",
-            icon: "instagram",
+            href: "https://x.com/",
+            icon: "twitter",
           },
           {
-            id: "personal-portfolio",
-            label: "Portfolio",
-            value: "Selected artwork deck",
-            href: "https://example.com/",
-            icon: "gallery",
+            id: "personal-discord",
+            label: "Discord",
+            value: "yourname#0000",
+            href: "https://discord.com/",
+            icon: "discord",
           },
           {
             id: "personal-email",
-            label: "Email",
+            label: "Mail",
             value: "hello@example.com",
             href: "mailto:hello@example.com",
             icon: "mail",
@@ -241,22 +254,22 @@ export const PROFILE_SITE_DATA = {
           "特別適合需要一套視覺語言、但又不想做得過度正式的文化或學生向專案。",
         links: [
           {
-            id: "group-instagram",
-            label: "Instagram",
+            id: "group-twitter",
+            label: "Twitter",
             value: "@yourclub",
-            href: "https://instagram.com/",
-            icon: "instagram",
+            href: "https://x.com/",
+            icon: "twitter",
           },
           {
-            id: "group-website",
-            label: "Website",
-            value: "Project archive",
-            href: "https://example.com/",
-            icon: "globe",
+            id: "group-discord",
+            label: "Discord",
+            value: "yourserver#0000",
+            href: "https://discord.com/",
+            icon: "discord",
           },
           {
             id: "group-email",
-            label: "Email",
+            label: "Mail",
             value: "studio@example.com",
             href: "mailto:studio@example.com",
             icon: "mail",
@@ -324,4 +337,4 @@ export type SocialLink = {
 };
 
 export type GalleryFit = "contain" | "cover";
-export type SocialIconKey = "instagram" | "gallery" | "mail" | "globe";
+export type SocialIconKey = "twitter" | "discord" | "mail";

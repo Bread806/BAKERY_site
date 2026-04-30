@@ -7,11 +7,10 @@ import {
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
-  Globe,
-  Instagram,
   Mail,
+  MessageCircle,
+  Twitter,
   X,
-  GalleryVerticalEnd,
   type LucideIcon,
 } from "lucide-react";
 
@@ -76,10 +75,9 @@ const SITE_DATA = {
 } satisfies SiteDataMap;
 
 const SOCIAL_ICONS = {
-  instagram: Instagram,
-  gallery: GalleryVerticalEnd,
+  twitter: Twitter,
+  discord: MessageCircle,
   mail: Mail,
-  globe: Globe,
 } satisfies Record<SocialIconKey, LucideIcon>;
 
 const GALLERY_TABS = ["works", "commission"] as const;
@@ -357,7 +355,7 @@ export function ProfilePage() {
                     src={profile.wordmark.image}
                     alt={profile.wordmark.alt}
                     sizes="(min-width: 640px) 320px, 220px"
-                    className="h-auto max-h-20 w-auto object-contain sm:max-h-28"
+                    className="h-auto max-h-35 w-auto object-contain sm:max-h-45"
                   />
                 </div>
 
@@ -592,7 +590,7 @@ function GalleryPanel({
       </div>
 
       <div className="overflow-hidden rounded-[26px] border border-white/20 bg-white/6 p-2.5 backdrop-blur-2xl">
-        <div className="grid gap-3 lg:grid-cols-[minmax(0,1.2fr)_minmax(220px,0.72fr)]">
+        <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(120px,0.24fr)]">
           <motion.button
             type="button"
             onClick={onOpenLightbox}
@@ -600,8 +598,8 @@ function GalleryPanel({
             whileTap={reduceMotion ? undefined : { scale: 0.995 }}
             className="group relative overflow-hidden rounded-[22px] border border-white/10 bg-black/30 text-left"
           >
-            {/* Gallery image size lives here: change aspect-* and min-h-* to resize the main image, and change contain-image p-* below to make artwork look larger or smaller inside the frame. */}
-            <div className="relative aspect-[4/5] min-h-[14rem] sm:min-h-[18rem]">
+            {/* Gallery image size lives here: change aspect-* and min-h-* to better fit wide artwork like 16:9 images. */}
+            <div className="relative aspect-[16/9] min-h-[11rem] sm:min-h-[15rem] md:min-h-[18rem]">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={item.id}
@@ -620,7 +618,7 @@ function GalleryPanel({
                     sizes="(min-width: 1024px) 60vw, 100vw"
                     className={cn(
                       item.fit === "contain"
-                        ? "object-contain p-5 sm:p-6 md:p-7"
+                        ? "object-contain p-3 sm:p-4 md:p-5"
                         : "object-cover",
                     )}
                   />
@@ -640,23 +638,6 @@ function GalleryPanel({
                 {String(currentIndex + 1).padStart(2, "0")} /{" "}
                 {String(section.items.length).padStart(2, "0")}
               </p>
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={item.id}
-                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
-                  transition={imageTransition}
-                  className="space-y-3"
-                >
-                  <h3 className="font-serif text-xl tracking-tight text-white sm:text-[1.6rem]">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs leading-6 text-white/68 sm:text-sm">
-                    {item.description}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
             </div>
 
             <div className="mt-5 space-y-4">
@@ -667,15 +648,6 @@ function GalleryPanel({
                 <IconButton label="Next image" onClick={onNext}>
                   <ChevronRight className="size-4" />
                 </IconButton>
-              </div>
-
-              <div className={cn("rounded-[18px] border bg-white/6 p-3", accentBorder)}>
-                <p className="text-[0.72rem] uppercase tracking-[0.26em] text-white/45">
-                  Presentation
-                </p>
-                <p className="mt-2 text-xs leading-6 text-white/72 sm:text-sm">
-                  單圖展示把注意力留給當下這張作品，不讓內容在縮圖網格裡被快速消耗。
-                </p>
               </div>
             </div>
           </div>
@@ -726,14 +698,6 @@ function ContactPanel({ profile }: { profile: ProfileEntry }) {
         <p className="mt-4 text-sm leading-8 text-white/70 sm:text-base">
           {profile.sections.contact.description}
         </p>
-        <div className="mt-8 rounded-[24px] border border-white/12 bg-black/25 p-5">
-          <p className="text-[0.72rem] uppercase tracking-[0.28em] text-white/45">
-            Availability
-          </p>
-          <p className="mt-3 text-sm leading-7 text-white/72">
-            {profile.sections.contact.note}
-          </p>
-        </div>
       </div>
 
       <div className="space-y-4">
@@ -843,8 +807,8 @@ function Lightbox({
 
             <div className="overflow-hidden rounded-[32px] border border-white/10 bg-white/6 p-3 backdrop-blur-2xl">
               <div className="relative overflow-hidden rounded-[28px] bg-black/35">
-                {/* Lightbox image size lives here: change aspect-* and min-h-* to resize the modal image, and change contain-image p-* below to make the artwork fill more or less of the modal. */}
-                <div className="relative aspect-[16/10] min-h-[22rem] sm:min-h-[30rem]">
+                {/* Lightbox image size lives here: keep this close to 16:9 when your source artwork is wide. */}
+                <div className="relative aspect-[16/9] min-h-[18rem] sm:min-h-[26rem]">
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.div
                       key={item.id}
@@ -861,7 +825,7 @@ function Lightbox({
                         sizes="100vw"
                         className={cn(
                           item.fit === "contain"
-                            ? "object-contain p-8 sm:p-10"
+                            ? "object-contain p-4 sm:p-6"
                             : "object-cover",
                         )}
                       />
