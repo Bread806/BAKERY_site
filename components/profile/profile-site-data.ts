@@ -14,10 +14,11 @@ import personalAvatar from "@/assets/卡蚯蚓_完稿.png";
 import personalWorkOne from "@/assets/Bread_work/work_karas.jpg";
 import personalWorkTwo from "@/assets/Bread_work/work_rain.jpeg";
 import personalWorkthree from "@/assets/Bread_work/love_sick.png";
-import personalWorkfour from "@/assets/Bread_work/love_sick.png";
+import personalWorkfour from "@/assets/Bread_work/work_between_us.jpg";
 import personalCommissionOne from "@/assets/Bread_commission/work_narciss.jpg";
 import personalCommissionTwo from "@/assets/Bread_commission/work_sparky.jpg";
 import personalCommissionThree from "@/assets/Bread_commission/work_want.jpg";
+import personalCommissionFour from "@/assets/Bread_commission/work_yukichan.png";
 import personalWordmarkDark from "@/assets/卡蚯蚓標準字/黑字.png";
 import personalWordmarkLight from "@/assets/卡蚯蚓標準字/白字.png";
 import personalwhitetype from "@/assets/卡蚯蚓標準字/white_type.png";
@@ -44,45 +45,45 @@ export const PROFILE_SITE_DATA = {
       works: {
         label: "Works",
         eyebrow: "Selected Artwork",
-        heading: "過往發表內容",
+        heading: "發表作品",
         description:
           "節錄部分合作與創作。",
         items: [
           {
             id: "personal-work-main",
-            title: "卡蚯蚓 Character Key Visual",
+            title: "居酒屋的姊姊似乎討厭下雨天",
             description:
-              "作為個人代表角色的完稿，重點在辨識度、姿態與透明背景下的可延展性。",
+              "Project:Limnos｜Voice:黑銀夜烏｜Script:卡蚯蚓",
             image: personalWorkOne,
-            alt: "卡蚯蚓角色主視覺插畫",
+            alt: "居酒屋的姊姊似乎討厭下雨天",
             fit: "contain",
           },
           {
             id: "personal-work-shiba",
-            title: "二號柴柴",
+            title: "雨季與畢業季",
             description:
-              "以更圓潤的輪廓和留白去測試角色親和力，適合社群貼文與周邊延伸。",
+              "雨季與畢業季",
             image: personalWorkTwo,
-            alt: "二號柴柴角色插畫",
+            alt: "雨季與畢業季",
             fit: "contain",
           },
           {
             id: "personal-work-photo",
-            title: "Studio Snapshot",
+            title: "Love Sick",
             description:
-              "透過實拍保留筆觸與材質細節，讓數位作品在展示時多一點溫度和真實感。",
+              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓",
             image: personalWorkthree,
-            alt: "個人作品展示實拍照",
+            alt: "Love Sick",
             fit: "contain",
           },
           {
             id: "personal-work-photo",
-            title: "Studio Snapshot",
+            title: "我們的事",
             description:
-              "透過實拍保留筆觸與材質細節，讓數位作品在展示時多一點溫度和真實感。",
+              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓",
             image: personalWorkfour,
-            alt: "個人作品展示實拍照",
-            fit: "cover",
+            alt: "我們的事",
+            fit: "contain",
           },
         ],
       },
@@ -95,29 +96,38 @@ export const PROFILE_SITE_DATA = {
         items: [
           {
             id: "personal-commission-photo",
-            title: "Campaign Mood Frame",
+            title: "我才是最特別的納一位",
             description:
-              "以氛圍照和插畫語氣對齊專案方向，適合在提案初期建立共同想像。",
+              "Project:納希斯Narciss｜Voice:納希斯Narciss｜Script:卡蚯蚓",
             image: personalCommissionOne,
-            alt: "個人委託作品展示照",
-            fit: "cover",
+            alt: "我才是最特別的納一位",
+            fit: "contain",
           },
           {
             id: "personal-commission-wordmark-light",
-            title: "Signature Wordmark",
+            title: "鼠在不想離開你",
             description:
-              "白字版本可以直接放進首頁、封面和大面積留白的展示環境。",
+              "Project:咲鼠｜Voice:咲鼠｜Script:卡蚯蚓",
             image: personalCommissionTwo,
-            alt: "卡蚯蚓白字標準字",
+            alt: "鼠在不想離開你",
             fit: "contain",
           },
           {
             id: "personal-commission-wordmark-dark",
-            title: "High-Contrast System",
+            title: "只想要你聽著我",
             description:
-              "黑字版本更適合印刷和標籤型版面，能保留識別的一致性。",
+              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓 youtube: https://www.youtube.com/watch?v=Zt2h8sQyXqA",
             image: personalCommissionThree,
-            alt: "卡蚯蚓黑字標準字",
+            alt: "只想要你聽著我",
+            fit: "contain",
+          },
+          {
+            id: "personal-commission-four",
+            title: "羞澀的新婚之夜～小雪在你懷中低聲呢喃的愛",
+            description:
+              "Project:雪白薄紗｜voice:小雪Yukichan｜Script:卡蚯蚓",
+            image: personalCommissionFour,
+            alt: "羞澀的新婚之夜～小雪在你懷中低聲呢喃的愛",
             fit: "contain",
           },
         ],
@@ -176,45 +186,28 @@ export const PROFILE_SITE_DATA = {
     sections: {
       works: {
         label: "Works",
-        eyebrow: "Identity System",
-        heading: "把社團語氣做成一套能延伸的標誌系統",
+        eyebrow: "released works",
+        heading: "敬請期待",
         description:
-          "這些是 BAKERY 目前最有辨識度的主視覺版本，適合放進海報、投影片封面與社群宣傳，維持一眼就記得住的節奏。",
+          "",
         items: [
           {
             id: "group-work-main",
-            title: "Primary White Lockup",
-            description: "最完整的白色主標版本，適合深色背景與主宣傳視覺。",
+            title: "敬請期待",
+            description: "敬請期待",
             image: bakeryWorkOne,
-            alt: "BAKERY 白色主標誌",
+            alt: "敬請期待",
             fit: "contain",
           },
-          {
-            id: "group-work-secondary",
-            title: "Secondary White Mark",
-            description:
-              "適合作為版面中的中型焦點，保留品牌感也方便搭配其他資訊層。",
-            image: bakeryWorkTwo,
-            alt: "BAKERY 白色次標誌",
-            fit: "contain",
-          },
-          {
-            id: "group-work-experimental",
-            title: "Expanded White Variant",
-            description:
-              "更適合用在展演、貼文封面或標題式畫面，帶出較強的空間感。",
-            image: bakeryWorkThree,
-            alt: "BAKERY 白色延伸標誌",
-            fit: "contain",
-          },
+          
         ],
       },
       commission: {
-        label: "Commission",
-        eyebrow: "Collaboration Format",
-        heading: "可快速套進聯名、海報與活動版面的識別版本",
+        label: "",
+        eyebrow: "Collaboration",
+        heading: "敬請期待",
         description:
-          "黑色系統比較適合淺底、印刷和大量文字併排的場景，能讓 BAKERY 的語氣在不同合作案裡保持一致。",
+          "",
         items: [
           {
             id: "group-commission-main",
@@ -246,10 +239,10 @@ export const PROFILE_SITE_DATA = {
       },
       contact: {
         label: "Contact",
-        eyebrow: "Reach The Collective",
-        heading: "如果想聊活動、聯名或社團合作，這裡最直接",
+        eyebrow: "Contact Us",
+        heading: "聯絡方式",
         description:
-          "BAKERY 目前適合展演海報、社群主視覺、聯名頁面和活動識別延伸。把需求先整理成幾句話，我們就能很快切進重點。",
+          "合作案件敬請使用 Emaill 聯繫。若三個工作日未回覆請多提醒我幾次。",
         note:
           "特別適合需要一套視覺語言、但又不想做得過度正式的文化或學生向專案。",
         links: [

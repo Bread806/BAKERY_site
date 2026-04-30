@@ -574,12 +574,10 @@ function GalleryPanel({
           <h2 className="font-serif text-3xl tracking-tight text-white sm:text-4xl md:text-[2.9rem]">
             {section.heading}
           </h2>
-          <p className="text-sm leading-8 text-white/68 sm:text-base">
-            {section.description}
-          </p>
+          <p className="space-y-2 text-sm leading-8 text-white/68 sm:text-base [&_a]:underline [&_a]:underline-offset-4 [&_a]:text-white/90 hover:[&_a]:text-white" dangerouslySetInnerHTML={{ __html: section.description }} />
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2">
           <IconButton label="Previous image" onClick={onPrevious}>
             <ChevronLeft className="size-4" />
           </IconButton>
