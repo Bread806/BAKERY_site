@@ -46,7 +46,7 @@ export const PROFILE_SITE_DATA = {
         eyebrow: "Selected Artwork",
         heading: "過往發表內容",
         description:
-          "節錄部分合作與創作。所有內容可見<a href=\"??\">test</a>",
+          "節錄部分合作與創作。",
         items: [
           {
             id: "personal-work-main",
@@ -256,22 +256,22 @@ export const PROFILE_SITE_DATA = {
           {
             id: "group-twitter",
             label: "Twitter",
-            value: "@yourclub",
-            href: "https://x.com/",
+            value: "@bread_sk8",
+            href: "https://x.com/bread_sk8",
             icon: "twitter",
           },
           {
             id: "group-discord",
             label: "Discord",
-            value: "yourserver#0000",
-            href: "https://discord.com/",
+            value: "@bread_sk8",
+            href: "https://discord.gg/7SkGeDsUWu",
             icon: "discord",
           },
           {
             id: "group-email",
             label: "Mail",
-            value: "studio@example.com",
-            href: "mailto:studio@example.com",
+            value: "wormbakery@gmail.com",
+            href: "mailto:wormbakery@gmail.com",
             icon: "mail",
           },
         ],
