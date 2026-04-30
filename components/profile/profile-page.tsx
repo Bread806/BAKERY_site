@@ -590,7 +590,7 @@ function GalleryPanel({
       </div>
 
       <div className="overflow-hidden rounded-[26px] border border-white/20 bg-white/6 p-2.5 backdrop-blur-2xl">
-        <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(120px,0.24fr)]">
+        <div className="grid grid-cols-1 gap-3">
           <motion.button
             type="button"
             onClick={onOpenLightbox}
@@ -598,8 +598,7 @@ function GalleryPanel({
             whileTap={reduceMotion ? undefined : { scale: 0.995 }}
             className="group relative overflow-hidden rounded-[22px] border border-white/10 bg-black/30 text-left"
           >
-            {/* Gallery image size lives here: change aspect-* and min-h-* to better fit wide artwork like 16:9 images. */}
-            <div className="relative aspect-[16/9] min-h-[11rem] sm:min-h-[15rem] md:min-h-[18rem]">
+            <div className="relative w-full">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={item.id}
@@ -607,16 +606,16 @@ function GalleryPanel({
                   animate={{ opacity: 1, scale: 1 }}
                   exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.02 }}
                   transition={imageTransition}
-                  className="absolute inset-0"
+                  className="relative w-full"
                 >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_55%)]" />
                   <Image
                     src={item.image}
                     alt={item.alt}
-                    fill
+                    width={item.image.width}
+                    height={item.image.height}
                     priority
-                    sizes="(min-width: 1024px) 60vw, 100vw"
                     className={cn(
+                      "h-auto w-full",
                       item.fit === "contain"
                         ? "object-contain p-3 sm:p-4 md:p-5"
                         : "object-cover",
@@ -631,29 +630,13 @@ function GalleryPanel({
               Open Lightbox
             </div>
           </motion.button>
-
-          <div className="flex flex-col justify-between rounded-[22px] border border-white/10 bg-black/25 p-4 sm:p-5">
-            <div className="space-y-3">
-              <p className={cn("text-xs uppercase tracking-[0.32em]", accentText)}>
-                {String(currentIndex + 1).padStart(2, "0")} /{" "}
-                {String(section.items.length).padStart(2, "0")}
-              </p>
-            </div>
-
-            <div className="mt-5 space-y-4">
-              <div className="flex items-center gap-2 md:hidden">
-                <IconButton label="Previous image" onClick={onPrevious}>
-                  <ChevronLeft className="size-4" />
-                </IconButton>
-                <IconButton label="Next image" onClick={onNext}>
-                  <ChevronRight className="size-4" />
-                </IconButton>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-2">
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <IconButton label="Previous image" onClick={onPrevious}>
+            <ChevronLeft className="size-4" />
+          </IconButton>
+
           {section.items.map((slide, index) => {
             const isActive = currentIndex === index;
 
@@ -679,6 +662,10 @@ function GalleryPanel({
               </button>
             );
           })}
+
+          <IconButton label="Next image" onClick={onNext}>
+            <ChevronRight className="size-4" />
+          </IconButton>
         </div>
       </div>
     </div>
