@@ -82,6 +82,8 @@ const SOCIAL_ICONS = {
 
 const GALLERY_TABS = ["works", "commission"] as const;
 const TAB_ORDER = ["works", "commission", "contact"] as const;
+const PERSONAL_TABS = ["works", "commission", "contact"] as const;
+const GROUP_TABS = ["works", "contact"] as const;
 const INITIAL_SLIDE_STATE: SlideState = {
   personal: { works: 0, commission: 0 },
   group: { works: 0, commission: 0 },
@@ -107,6 +109,13 @@ export function ProfilePage() {
   const currentSection =
     activeTab === "contact" ? null : profile.sections[activeTab];
   const currentItem = currentSection?.items[currentGalleryIndex] ?? null;
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "") as IdentityKey;
+    if (hash === "personal" || hash === "group") {
+      setIdentity(hash);
+    }
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -213,6 +222,8 @@ export function ProfilePage() {
       return;
     }
 
+    window.history.replaceState(null, "", `#${nextIdentity}`);
+
     if (preloadedIdentities[nextIdentity]) {
       startTransition(() => {
         setIdentity(nextIdentity);
@@ -250,9 +261,10 @@ export function ProfilePage() {
     <div className="relative isolate min-h-screen overflow-hidden bg-[#080607] text-white">
       <div
         className={cn(
-          "pointer-events-none absolute inset-0 bg-[url('/images/profile-bg.jpg')] bg-cover bg-center mix-blend-screen",
+          "pointer-events-none absolute inset-0 bg-cover bg-center mix-blend-screen",
           profile.theme.backgroundImageOpacity,
         )}
+        style={{ backgroundImage: "url('/images/profile-bg.jpg')" }}
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
 
@@ -380,6 +392,7 @@ export function ProfilePage() {
                 activeTab={activeTab}
                 onChange={handleTabChange}
                 accentClass={profile.theme.accentSurface}
+                identity={identity}
               />
 
               {/* Works / Commission / Contact content comes from profile-site-data.ts. */}
@@ -502,16 +515,20 @@ function SectionTabs({
   activeTab,
   onChange,
   accentClass,
+  identity,
 }: {
   sections: ProfileEntry["sections"];
   activeTab: TabKey;
   onChange: (tab: TabKey) => void;
   accentClass: string;
+  identity: IdentityKey;
 }) {
+  const visibleTabs = identity === "group" ? GROUP_TABS : PERSONAL_TABS;
+
   return (
     <LayoutGroup id="content-tabs">
       <div className="flex flex-wrap items-center justify-center gap-5 border-b border-white/10 pb-3 sm:gap-8">
-        {TAB_ORDER.map((tab) => {
+        {visibleTabs.map((tab) => {
           const isActive = activeTab === tab;
 
           return (
@@ -629,6 +646,15 @@ function GalleryPanel({
             </div>
           </motion.button>
         </div>
+
+        {item.description ? (
+          <div className="px-2 pb-1 pt-2">
+            <p
+              className="text-sm leading-7 text-white/72 sm:text-base [&_a]:pointer-events-auto [&_a]:underline [&_a]:underline-offset-4 [&_a]:text-white/90 hover:[&_a]:text-white"
+              dangerouslySetInnerHTML={{ __html: item.description }}
+            />
+          </div>
+        ) : null}
 
         <div className="mt-6 flex items-center justify-center gap-3">
           <IconButton label="Previous image" onClick={onPrevious}>
