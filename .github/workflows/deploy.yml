@@ -24,17 +24,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24 # 升級到 24，對應 GitHub 的要求
-          cache: 'npm'
+          node-version: 24
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build static site
-        run: npm run build
+        run: pnpm run build
 
       - name: Verify CNAME exists
         # 簡化邏輯，確保 CNAME 一定在 dist 裡
