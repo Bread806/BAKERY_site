@@ -12,7 +12,7 @@ import bakeryCommissionTwo from "@/assets/BAKERY標準字/黑/黑bakery logo-02.
 import bakeryCommissionThree from "@/assets/BAKERY標準字/黑/黑bakery logo-03.png";
 import personalAvatar from "@/assets/二號柴柴2.png";
 import personalWorkOne from "@/assets/Bread_work/work_karas.jpg";
-import personalWorkTwo from "@/assets/Bread_work/work_rain.jpeg";
+import personalWorkTwo from "@/assets/Bread_work/work_sis.jpg";
 import personalWorkthree from "@/assets/Bread_work/love_sick.png";
 import personalWorkfour from "@/assets/Bread_work/work_between_us.jpg";
 import personalCommissionOne from "@/assets/Bread_commission/work_narciss.jpg";
@@ -47,31 +47,31 @@ export const PROFILE_SITE_DATA = {
         eyebrow: "Selected Artwork",
         heading: "發表作品",
         description:
-          "節錄部分合作與創作。 <a href='https://youtu.be/H5BQIZOmnuE'>連結</a>",
+          "節錄部分合作與創作。",
         items: [
           {
             id: "personal-work-main",
             title: "居酒屋的姊姊似乎討厭下雨天",
             description:
-              "Project:Limnos｜Voice:黑銀夜烏｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/H5BQIZOmnuE?si=BiW56GAkF6bJaNJk'>連結</a>" ,
+              "Project:Limnos｜Voice:黑銀夜烏｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/H5BQIZOmnuE?si=BiW56GAkF6bJaNJk'>收聽連結</a>" ,
             image: personalWorkOne,
             alt: "居酒屋的姊姊似乎討厭下雨天",
             fit: "contain",
           },
           {
             id: "personal-work-shiba",
-            title: "雨季與畢業季",
+            title: "鄉間小路與多愁善感的姐姐",
             description:
-              "雨季與畢業季",
+              "Project:聲色廠所｜Voice:晚晚｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/8pzdFcY7cEU?si=Ak6qB7Y1qDox0PMu'>收聽連結</a>",
             image: personalWorkTwo,
-            alt: "雨季與畢業季",
+            alt: "鄉間小路與多愁善感的姐姐",
             fit: "contain",
           },
           {
             id: "personal-work-photo",
             title: "Love Sick",
             description:
-              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓",
+              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/0J5-uTq_Iv8?si=UNtJg9aEn1Y2aWKO'>收聽連結</a>",
             image: personalWorkthree,
             alt: "Love Sick",
             fit: "contain",
@@ -80,7 +80,7 @@ export const PROFILE_SITE_DATA = {
             id: "personal-work-photo",
             title: "我們的事",
             description:
-              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓",
+              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/7skNvaxGDZ0?si=qaXVwU8TeU1Z13A9'>收聽連結</a>",
             image: personalWorkfour,
             alt: "我們的事",
             fit: "contain",
@@ -92,13 +92,13 @@ export const PROFILE_SITE_DATA = {
         eyebrow: "Selected Commission",
         heading: "委託內容",
         description:
-          "過往委託內容，可能包含全年齡或成人向。",
+          "過往委託內容，包含全年齡或成人向。",
         items: [
           {
             id: "personal-commission-photo",
             title: "我才是最特別的納一位",
             description:
-              "Project:納希斯Narciss｜Voice:納希斯Narciss｜Script:卡蚯蚓",
+              "Project:納希斯Narciss｜Voice:納希斯Narciss｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/ZIVgpsQ8B-U?si=eTfh_DPzPyYzZz15'>收聽連結</a>",
             image: personalCommissionOne,
             alt: "我才是最特別的納一位",
             fit: "contain",
@@ -107,7 +107,7 @@ export const PROFILE_SITE_DATA = {
             id: "personal-commission-wordmark-light",
             title: "鼠在不想離開你",
             description:
-              "Project:咲鼠｜Voice:咲鼠｜Script:卡蚯蚓",
+              "Project:咲鼠｜Voice:咲鼠｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/QUgRyT-gGnk?si=NyMrDlOOjlhOdqTq'>收聽連結</a>",
             image: personalCommissionTwo,
             alt: "鼠在不想離開你",
             fit: "contain",
@@ -116,7 +116,7 @@ export const PROFILE_SITE_DATA = {
             id: "personal-commission-wordmark-dark",
             title: "只想要你聽著我",
             description:
-              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓 youtube: https://www.youtube.com/watch?v=Zt2h8sQyXqA",
+              "Project:晚晚配音中｜Voice:晚晚｜Script:卡蚯蚓 <a target=\"_blank\" href='https://youtu.be/05M8vv48VFU?si=Bwxbg5OeYYp4PKtS'>收聽連結</a>",
             image: personalCommissionThree,
             alt: "只想要你聽著我",
             fit: "contain",
@@ -125,7 +125,7 @@ export const PROFILE_SITE_DATA = {
             id: "personal-commission-four",
             title: "羞澀的新婚之夜～小雪在你懷中低聲呢喃的愛",
             description:
-              "Project:雪白薄紗｜voice:小雪Yukichan｜Script:卡蚯蚓",
+              "Project:雪白薄紗｜voice:小雪Yukichan｜Script:卡蚯蚓 <a target=\"_blank\" href='https://www.dlsite.com/maniax/work/=/product_id/RJ01592874.html'>收聽連結</a>",
             image: personalCommissionFour,
             alt: "羞澀的新婚之夜～小雪在你懷中低聲呢喃的愛",
             fit: "contain",
