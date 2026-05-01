@@ -23,7 +23,7 @@ const monoFont = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://wormbakery.com"),
   title: "BAKERY / 卡蚯蚓",
-  description: "A motion-rich profile experience for 卡蚯蚓 and BAKERY.",
+  description: "卡蚯蚓與蚯蚓麵包屋的個人網站",
   icons: {
     icon: [
       {
