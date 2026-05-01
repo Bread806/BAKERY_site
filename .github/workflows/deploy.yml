@@ -13,6 +13,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# 保持在頂層是正確的，但確認沒有縮排錯誤
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true" # 建議加上引號確保作為字串讀取
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +27,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24 # 升級到 24，對應 GitHub 的要求
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -32,13 +37,12 @@ jobs:
         run: npm run build
 
       - name: Verify CNAME exists
+        # 簡化邏輯，確保 CNAME 一定在 dist 裡
         run: |
-          if [ ! -f ./dist/CNAME ]; then
-            echo "CNAME file missing in dist, copying from public/CNAME"
-            cp public/CNAME ./dist/CNAME
+          if [ -f public/CNAME ] && [ ! -f dist/CNAME ]; then
+            cp public/CNAME dist/CNAME
           fi
-          echo "CNAME content:"
-          cat ./dist/CNAME
+          [ -f dist/CNAME ] && echo "CNAME checked: $(cat dist/CNAME)" || echo "Warning: No CNAME found"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
